@@ -1,0 +1,27 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = LF
+max_line_length = 80
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
+
+[*.{csproj,sln,json}]
+indent_style = tab
+indent_size = 2
+
+[*.cs]
+indent_style = tab
+indent_size = 4
+insert_final_newline = true
+
+[Makefile]
+indent_style = tab
+indent_size = 4
+max_line_length = 255
+
+[Dockerfile]
+indent_size = 4
