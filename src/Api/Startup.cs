@@ -101,8 +101,8 @@ namespace Ecommerce.Services.Orders.Api
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "E-Commerce Wishlists",
-                    Description = "Microservice for managing wishlists",
+                    Title = "E-Commerce Orders",
+                    Description = "Microservice for managing Orders",
                     Contact = new OpenApiContact
                     {
                         Name = "Razvan Radu",
@@ -138,7 +138,7 @@ namespace Ecommerce.Services.Orders.Api
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>
-				c.SwaggerEndpoint("/swagger/v1/swagger.json", "Wishlists API"));
+				c.SwaggerEndpoint("/swagger/v1/swagger.json", "Orders API"));
         }
     }
 }

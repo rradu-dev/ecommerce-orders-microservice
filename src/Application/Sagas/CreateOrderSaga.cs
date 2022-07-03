@@ -8,11 +8,9 @@ using Ecommerce.Services.Orders.Core.Entities;
 namespace Ecommerce.Services.Orders.Application.Sagas
 {
     public class CreateOrderSaga : Saga<CreateOrderSagaData>,
-		ISagaStartAction<OrderApprovedEvent>,
+		ISagaStartAction<OrderCreatedEvent>,
 		ISagaAction<OrderStockReservedEvent>,
-		ISagaAction<OrderStockRejectedEvent>,
-		ISagaAction<OrderPaymentApprovedEvent>,
-		ISagaAction<OrderPaymentRejectedEvent>
+		ISagaAction<OrderStockRejectedEvent>
     {
 		private readonly IRepository<Order, Guid> _repository;
 
@@ -21,20 +19,25 @@ namespace Ecommerce.Services.Orders.Application.Sagas
 			_repository = repository;
         }
 
-        public async Task HandleAsync(OrderApprovedEvent message, ISagaContext context)
+        public Task HandleAsync(OrderCreatedEvent message, ISagaContext context)
         {
+            Data.CustomerId = message.CustomerId;
             Data.OrderId = message.OrderId;
+			Data.OrderStatus = OrderStatus.Created;
+
 			// await _busPublisher.PublishAsync("topic", new StockReserveOrderEvent(message.OrderId));
+
+			return Task.CompletedTask;
         }
 
-        public Task CompensateAsync(OrderApprovedEvent message, ISagaContext context)
+        public Task CompensateAsync(OrderCreatedEvent message, ISagaContext context)
         {
             return RejectAsync();
         }
 
         public Task HandleAsync(OrderStockReservedEvent message, ISagaContext context)
         {
-            // await _busPublisher.PublishAsync("topic", new PayOrderEvent(message.OrderId));
+			throw new NotImplementedException();
         }
 
         public Task CompensateAsync(OrderStockReservedEvent message, ISagaContext context)
@@ -52,26 +55,6 @@ namespace Ecommerce.Services.Orders.Application.Sagas
         public Task CompensateAsync(OrderStockRejectedEvent message, ISagaContext context)
         {
             return RejectAsync();
-        }
-
-        public Task HandleAsync(OrderPaymentApprovedEvent message, ISagaContext context)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task CompensateAsync(OrderPaymentApprovedEvent message, ISagaContext context)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task HandleAsync(OrderPaymentRejectedEvent message, ISagaContext context)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task CompensateAsync(OrderPaymentRejectedEvent message, ISagaContext context)
-        {
-            throw new NotImplementedException();
         }
     }
 }

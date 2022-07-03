@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
 		<RootNamespace>Ecommerce.Services.Orders.Core</RootNamespace>
 		<AssemblyName>Ecommerce.Services.Orders.Core</AssemblyName>
   </PropertyGroup>

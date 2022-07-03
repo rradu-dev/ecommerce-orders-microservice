@@ -4,7 +4,7 @@ using Ecommerce.Services.Orders.Application.MessageBroker;
 
 namespace Ecommerce.Services.Orders.Application.Events
 {
-	public class OrderApprovedEvent : IEvent
+	public class OrderCreatedEvent : IEvent
 	{
 		public Guid OrderId { get; set; }
 		public Guid CustomerId { get; set; }
